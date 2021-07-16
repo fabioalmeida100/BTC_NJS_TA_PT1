@@ -15,6 +15,11 @@ describe('Testes de Integração', () => {
     CPF: '000.000.000-00'
   }
 
+  const clienteCarlos = {
+    Nome: 'Carlos Silva',
+    CPF: '000.000.000-01'
+  }
+
   const resultadoEsperado = {
     montante: 106.9,
     juros: 0.025,
@@ -101,5 +106,15 @@ describe('Testes de Integração', () => {
     // Resultado é obtido
     expect(res.body.erro).toBeDefined()
     expect(res.status).toBe(400)
+  })
+
+  test('Obter todos os clientes', async () => {
+    await db.cliente.create(clienteJoao)
+    await db.cliente.create(clienteCarlos)
+    const res = await request(app).get('/cliente');      
+
+    // Resultado é obtido
+    expect(res.status).toBe(200);
+    expect(res.body.length).toBeGreaterThanOrEqual(2);
   })
 })

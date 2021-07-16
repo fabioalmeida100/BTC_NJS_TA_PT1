@@ -32,6 +32,30 @@ describe('arredondar', () => {
 })
 
 describe('calcularPrestacoes', () => {
+  test('Montante deve ser maior que zero', () => {
+    // Premissas
+    const montante = -1
+    const numeroPrestacoes = 10
+
+    // Operação
+    const prestacoes = calculaValor.calcularPrestacoes(montante, numeroPrestacoes)
+
+    // Resultado esperado
+    expect(prestacoes.length).toBe(0);
+  })
+
+  test('Numero de parcelas deve ser maior que zero', () => {
+    // Premissas
+    const numeroPrestacoes = -1
+
+    // Operação
+    const prestacoes = calculaValor.calcularPrestacoes(200, numeroPrestacoes)
+
+    // Resultado esperado
+    expect(prestacoes.length).toBe(0);
+  })
+
+
   test('O número de parcelas é igual ao número de prestações', () => {
     // Premissas
     const numeroPrestacoes = 6
